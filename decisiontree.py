@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 from sklearn import tree
 from sklearn.preprocessing import LabelEncoder
+import matplotlib.pyplot as plt
+
+
 
 # Membaca dataset
 data = pd.read_csv('diabetes.csv', delimiter=',', header=0)
@@ -44,3 +47,12 @@ prediksiSalah = (hasilPrediksi != labelTesting).sum()
 print("Prediksi benar: ", prediksiBenar, "data")
 print("Prediksi salah: ", prediksiSalah, "data")
 print("Akurasi: ", prediksiBenar / (prediksiBenar + prediksiSalah) * 100, "%.")
+
+
+# Visualisasi pohon keputusan
+plt.figure(figsize=(20, 10))
+tree.plot_tree(model, filled=True, feature_names=["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", 
+                                                  "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"], 
+               class_names=["No Diabetes", "Diabetes"])
+plt.title("Decision Tree Visualization")
+plt.show()
